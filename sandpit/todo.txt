@@ -1,0 +1,22 @@
+A. Features
+1. DB export / import
+2. grid sorting
+3. grid filtering
+4. editing grid
+5. control positions
+6. graphs
+7. validating data
+8. inteligent sorting on dropdowns
+9. Add some graphic for better look
+
+B. Rework / code improvement
+
+1. generic directory with classes in sepertes files
+2. version control
+3. generic classes for form fileds
+4. Move remaining SQL code to MySQL SP
+5. documentation (wiki) + UML diagrams
+
+
+
+c. Bugs

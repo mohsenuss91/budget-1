@@ -1,0 +1,26 @@
+# -------------------------------------- dumping ----------------------------------
+# dump whole db
+mysqldump -u root -p budget --routines > dump_budget.sql
+
+# dump db without data
+mysqldump -u root -p --no-data budget > dump_budget.sql
+
+# dump only data
+mysqldump -u root -p --no-create-info budget > dump_budget.sql
+
+# dump whole db wtih stored procesures
+mysqldump -u root -p --routines --no-data budget > budget_backup.sql
+
+
+# example of creating db:
+CREATE DATABASE dbName;
+use dbName;
+# script with tables;
+
+# create user
+# MySQL admin:
+CREATE USER 'userName'@'localhost' IDENTIFIED BY 'userPassword';
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER on dbName.* to 'userName'@'localhost';
+
+
+

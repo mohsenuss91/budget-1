@@ -1,0 +1,41 @@
+#-*- coding: utf-8 -*-
+import MySQLdb
+
+#conect to database
+conn = MySQLdb.connect(host = "localhost",
+                       user = "budget",
+                       passwd = "budget",
+                       db = "budget")
+cursor = conn.cursor()
+
+engine = "InnoDB"
+query = ""
+#admin:
+#CREATE USER 'budget'@'localhost' IDENTIFIED BY 'budget';
+#GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER on budget.* to 'budget'@'localhost';
+#user:
+#CREATE DATABASE budget;
+
+#encoding:
+#query =  "ALTER DATABASE DEFAULT CHARACTER SET = utf8;\
+#ALTER DATABASE DEFAULT COLLATE = utf8_polish_ci;\
+#ALTER DATABASE CHARACTER SET = utf8;\
+#ALTER DATABASE COLLATE = utf8_polish_ci;"
+
+#create tables
+#query += "CREATE TABLE Account(ID SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL) ENGINE = %s;" % (engine)
+#query += "CREATE TABLE Category(ID SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL) ENGINE = %s;" % (engine)
+#ALTER TABLE Category ADD isExpense BOOLEAN NOT NULL;
+#query += "ALTER TABLE Category ADD isExpense BOOLEAN NOT NULL"
+
+#query += "CREATE TABLE SubCategory(ID SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL, categoryID BIGINT UNSIGNED, FOREIGN KEY(categoryID) REFERENCES Category(ID) ON UPDATE CASCADE ON DELETE CASCADE) ENGINE = %s;" % (engine)
+#query += "CREATE TABLE Entry(ID SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL, value DECIMAL(10,2), subCategoryID BIGINT UNSIGNED, accountID BIGINT UNSIGNED, isObligatory BOOLEAN, isRegular BOOLEAN, isFlow BOOLEAN, operationDate DATE, FOREIGN KEY(subCategoryID) REFERENCES SubCategory(ID) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(accountID) REFERENCES Account(ID) ON UPDATE CASCADE ON DELETE CASCADE) ENGINE = %s;" % (engine)
+query += "CREATE TABLE Transfer(ID SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL, value DECIMAL(10,2), fromAccountID BIGINT UNSIGNED, toAccountID BIGINT UNSIGNED, operationDate DATE, FOREIGN KEY(fromAccountID) REFERENCES Account(ID) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(toAccountID) REFERENCES Account(ID) ON UPDATE CASCADE ON DELETE CASCADE) ENGINE = %s;" % (engine)
+
+
+#execute queries
+cursor.execute(query)
+
+#close connection
+cursor.close()
+conn.close()
