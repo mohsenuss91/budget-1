@@ -35,7 +35,7 @@ class BaseForm(wx.Panel):
 		
 		self.fieldsSizer = wx.BoxSizer(wx.HORIZONTAL)
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
-		sizer.Add(self.bmp)
+		sizer.Add(self.bmp, 0, wx.ALIGN_BOTTOM)
 		sizer.AddSpacer(10)
 		sizer.Add(self.fieldsSizer, 0, wx.ALIGN_BOTTOM)
 		sizer.AddSpacer(5)

@@ -7,7 +7,7 @@ from base_form import *
 
 class ExpensesForm(BaseForm):
 	def __init__(self, parent):
-		BaseForm.__init__(self, parent)
+		BaseForm.__init__(self, parent, "../media/expenses.png")
 
 		self.dateField = DateField(self, "date", 120)
 		self.nameField = EditField(self, "name", 120)

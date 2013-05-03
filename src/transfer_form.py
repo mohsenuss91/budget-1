@@ -7,7 +7,7 @@ from base_form import *
 
 class TransferForm(BaseForm):
 	def __init__(self, parent):
-		BaseForm.__init__(self, parent)
+		BaseForm.__init__(self, parent, "../media/transfer.png")
 
 		accountTable = db.SelectAccounts()	
 		accountTable = (("NULL", u"--- none ---"), ) + accountTable
