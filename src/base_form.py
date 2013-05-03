@@ -10,44 +10,40 @@ class BaseTab():
 	pass
 
 class BaseForm(wx.Panel):
-	def __init__(self, parent):
+	def __init__(self, parent, imagePath):
 		wx.Panel.__init__(self, parent)
 		self.trigger = []
 		self.EditRowID = -1
 		self.fields =[]
+	
+		img = wx.Image(imagePath, wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+		self.bmp = wx.StaticBitmap(parent=self, bitmap=img)	
 		
-		sizerAdd = wx.BoxSizer(wx.VERTICAL)
 		bmpAdd = wx.Image("../media/add.png", wx.BITMAP_TYPE_PNG).ConvertToBitmap()
 		self.buttonAdd = wx.BitmapButton(self, -1, bmpAdd)
 		self.Bind(wx.EVT_BUTTON, self.ClickAdd, self.buttonAdd)
-		sizerAdd.AddSpacer(2)
-		sizerAdd.Add(self.buttonAdd, flag=wx.ALIGN_CENTER)
 
-		sizerCancel = wx.BoxSizer(wx.VERTICAL)
 		bmpCancel = wx.Image("../media/cancel.png", wx.BITMAP_TYPE_PNG).ConvertToBitmap()
 		self.buttonCancel = wx.BitmapButton(self, -1, bmpCancel, name="cancel")
 		self.Bind(wx.EVT_BUTTON, self.ClickCancel, self.buttonCancel)
-		sizerCancel.AddSpacer(2)
-		sizerCancel.Add(self.buttonCancel, flag=wx.ALIGN_CENTER)
 		self.buttonCancel.Show(False)
 		
-		sizerDelete = wx.BoxSizer(wx.VERTICAL)
 		bmpDelete = wx.Image("../media/delete.png", wx.BITMAP_TYPE_PNG).ConvertToBitmap()
 		self.buttonDelete = wx.BitmapButton(self, -1, bmpDelete)
 		self.Bind(wx.EVT_BUTTON, self.ClickDelete, self.buttonDelete)
-		sizerDelete.AddSpacer(2)
-		sizerDelete.Add(self.buttonDelete, flag=wx.ALIGN_CENTER)
 		self.buttonDelete.Show(False)				
 		
 		self.fieldsSizer = wx.BoxSizer(wx.HORIZONTAL)
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
-		sizer.Add(self.fieldsSizer)
-		#sizer.AddSpacer(5)
-		sizer.Add(sizerAdd)
+		sizer.Add(self.bmp)
 		sizer.AddSpacer(10)
-		sizer.Add(sizerCancel)
+		sizer.Add(self.fieldsSizer, 0, wx.ALIGN_BOTTOM)
+		sizer.AddSpacer(5)
+		sizer.Add(self.buttonAdd, 0, wx.ALIGN_BOTTOM)
 		sizer.AddSpacer(10)
-		sizer.Add(sizerDelete)		
+		sizer.Add(self.buttonCancel, 0, wx.ALIGN_BOTTOM)
+		sizer.AddSpacer(10)
+		sizer.Add(self.buttonDelete, 0, wx.ALIGN_BOTTOM)		
 		self.SetSizer(sizer)
 		
 	def	ForceRefresh(self):
@@ -113,8 +109,9 @@ class BaseForm(wx.Panel):
 	def OnClickDelete(self, event):
 		pass
 
-	def AddField(self, field):
-		self.fields += [field]
-		self.fieldsSizer.Add(field)
+	def AddField(self, field, addToFields=True):
+		if addToFields:
+			self.fields += [field]
+		self.fieldsSizer.Add(field, 0, wx.ALIGN_BOTTOM )
 		self.fieldsSizer.AddSpacer(10)
 		
