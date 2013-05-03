@@ -19,13 +19,13 @@ class Expenses(wx.Panel):
 		
 	def __sizer(self):
 		sizerAux = wx.BoxSizer(wx.VERTICAL)
-		sizerAux.AddSpacer(10)
-		sizerAux.Add(self.form, 1, wx.ALL | wx.EXPAND)
 		sizerAux.AddSpacer(15)
-		sizerAux.Add(self.grid, 7, wx.ALL | wx.EXPAND)
+		sizerAux.Add(self.form, 1, wx.ALL | wx.EXPAND)
+		sizerAux.AddSpacer(25)
+		sizerAux.Add(self.grid, 11, wx.ALL | wx.EXPAND)
 		
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
-		sizer.AddSpacer(35)
+		sizer.AddSpacer(25)
 		sizer.Add(sizerAux, 1, wx.ALL | wx.EXPAND)
 		self.SetSizer(sizer)
 
