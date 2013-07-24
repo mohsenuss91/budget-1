@@ -1,6 +1,6 @@
 import wx
 import datetime
-from db import *
+from db_budget import *
 		
 class BaseField(wx.Panel):
 	def __init__(self, parent, header):

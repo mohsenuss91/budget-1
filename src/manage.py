@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import wx
-from db import *
+from db_budget import *
 
 class Manage(wx.Panel):
 	def __init__(self, parent):

@@ -1,5 +1,5 @@
 import wx
-from db import *
+from db_budget import *
 
 import matplotlib
 matplotlib.use('WXAgg')

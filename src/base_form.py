@@ -2,7 +2,7 @@
 
 import wx
 import datetime
-from db import *
+from db_budget import *
 from useful import *
 from base_fields import *
 

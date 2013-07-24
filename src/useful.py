@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import wx
 import wx.grid
-from db import *
+from db_budget import *
 
 
 class GridDb(wx.grid.PyGridTableBase):

@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 import wx
-from db import *
+from db_budget import *
 from expenses import Expenses
 from manage import Manage
 from accounts import Accounts
@@ -31,7 +31,7 @@ class MainWindow(wx.Frame):
 
 
 if __name__ == '__main__':
-	db.Connect()
+	db.Connect("localhost", "budget", "budget", "budgetDev")
 	app = wx.PySimpleApp()
 	frame = MainWindow()
 	frame.Show(True)

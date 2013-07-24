@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import wx
-from db import *
+from db_budget import *
 from useful import *
 from base_form import *
 

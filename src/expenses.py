@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import wx
-from db import *
+from db_budget import *
 from useful import GridCtr
 from expenses_form import ExpensesForm
 
