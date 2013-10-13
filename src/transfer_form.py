@@ -10,7 +10,7 @@ class TransferForm(BaseForm):
 		BaseForm.__init__(self, parent, "../media/transfer.png")
 
 		accountTable = db.SelectAccounts()	
-		accountTable = (("NULL", u"--- none ---"), ) + accountTable
+		accountTable = ((None, u"--- none ---"), ) + accountTable
 		self.dateField = DateField(self, "date", 120)
 		self.nameField = EditField(self, "name", 120)
 		self.valueField = MoneyField(self, "value", 80)

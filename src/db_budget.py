@@ -17,7 +17,7 @@ class DB_Budget(DB):
 		return self._Query("INSERT INTO Entry SET name ='%s', " % name + "value = %s, " % value + "subCategoryID = %s, " % subCategoryID + "accountID = %s, " % accountID + "operationDate = '%s'" % date)
 
 	def InsertTransfer(self, name, value, fromAccountID, toAccountID, date):
-		return self._Query("INSERT INTO Transfer SET name ='%s', " % name + "value = %s, " % value + "fromAccountID = %s, " % fromAccountID + "toAccountID = %s, " % toAccountID + "operationDate = '%s'" % date)
+		return self._CallStoredProc('INSERT_TRANSFER', (date, name, value, fromAccountID, toAccountID) )
 
 # select
 
@@ -56,7 +56,7 @@ class DB_Budget(DB):
 	def UpdateEntry(self, entryID, date, name, value, subCategoryID, accountID):
 		return self._CallStoredProc('UPDATE_ENTRY', (entryID, date, name, value, subCategoryID, accountID) )
 
-	def UpdateTransfer(self, entryID, date, name, value, fromAccoutID, toAccountID):
-		return self._CallStoredProc('UPDATE_TRANSFER', (entryID, date, name, value, fromAccoutID, toAccountID) )	
+	def UpdateTransfer(self, entryID, date, name, value, fromAccountID, toAccountID):
+		return self._CallStoredProc('UPDATE_TRANSFER', (entryID, date, name, value, fromAccountID, toAccountID) )	
 
 db = DB_Budget()
