@@ -88,10 +88,12 @@ class BaseForm(wx.Panel):
 			self.OnClickAdd(event)
 		else:
 			self.OnClickUpdate(event)
-			self.AddMode()	
+			self.AddMode()
+		self.StopEdit()	
 
 	def ClickCancel(self, event):
 		self.AddMode()
+		self.StopEdit()
 		
 	def ClickDelete(self, event):
 		dlg = wx.MessageDialog(self, 'Are you sure, you want to remove row ?','Delete row', wx.YES_NO | wx.ICON_WARNING)
@@ -99,7 +101,8 @@ class BaseForm(wx.Panel):
 		dlg.Destroy()
 		if result == wx.ID_YES:
 			self.OnClickDelete(event)
-				
+		self.AddMode()
+		self.StopEdit()		
 	def OnClickAdd(self, event):
 		pass	
 		
@@ -115,3 +118,8 @@ class BaseForm(wx.Panel):
 		self.fieldsSizer.Add(field, 0, wx.ALIGN_BOTTOM )
 		self.fieldsSizer.AddSpacer(10)
 		
+	def	StopEdit(self):
+		self.connectedGrid.StopEdit()
+	
+	def SetConnectedGrid(self, grid):
+		self.connectedGrid = grid

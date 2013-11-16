@@ -2,7 +2,7 @@
 import wx
 import wx.grid
 from db_budget import *
-
+from base_fields import *
 
 class GridDb(wx.grid.PyGridTableBase):
 	def __init__(self, columns, data):
@@ -70,15 +70,21 @@ class GridCtr(wx.Panel):
 		self.checkAsc = wx.CheckBox(self, -1, "ascending")
 		self.Bind(wx.EVT_CHECKBOX, self.ChangeSort, self.checkAsc)
 		
+		self.filterEdit =  wx.TextCtrl(self, -1, "", size=(180, -1))
+
 		sizerSort = wx.BoxSizer(wx.HORIZONTAL)
 		sizerSort.Add(self.choiceSort)
 		sizerSort.AddSpacer(10)
 		sizerSort.Add(self.checkAsc)
-		
+		for idx in range(5):
+			sizerSort.AddSpacer(10)
+		sizerSort.Add(self.filterEdit)
+
 		self.table = GridDb(columns, self.selectFun())
 		self.grid = wx.grid.Grid(self)
 		self.editCol = -1
-		
+		self.editMode = False
+
 		self.grid.SetTable(self.table, True)
 		for idx in range(len(columns)):
 			self.grid.SetColSize(idx, columns[idx][1])
@@ -112,12 +118,14 @@ class GridCtr(wx.Panel):
 		self.form = form
 		
 	def EditRow(self, row):
-		attr = wx.grid.GridCellAttr()
-		attr.SetBackgroundColour(wx.Colour(154,205,50))
-		self.grid.SetRowAttr(row, attr)
-		self.grid.Refresh()
-		
-		self.form.EditMode(self.table.data[row][0])
+		if self.editMode == False:
+			self.editMode = True
+			attr = wx.grid.GridCellAttr()
+			attr.SetBackgroundColour(wx.Colour(154,205,50))
+			self.grid.SetRowAttr(row, attr)
+			self.grid.Refresh()
+			
+			self.form.EditMode(self.table.data[row][0])
 		
 	def SetEditCol(self, idx):
 		self.editCol = idx
@@ -135,3 +143,11 @@ class GridCtr(wx.Panel):
 			self.table.data = tuple(sorted(self.table.data, key=lambda item: item[No]))
 		else:
 			self.table.data = tuple(sorted(self.table.data, key=lambda item: item[No], reverse=True))		
+
+	def StopEdit(self):
+		self.editMode = False
+		for idx in range(self.grid.GetNumberRows()):
+			attr = wx.grid.GridCellAttr()
+			attr.SetBackgroundColour(wx.NullColor)
+			self.grid.SetRowAttr(idx, attr)
+		self.grid.Refresh()

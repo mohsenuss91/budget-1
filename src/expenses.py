@@ -14,6 +14,7 @@ class Expenses(wx.Panel):
 		columns = [["date", 120], ["name", 120], ["value", 90], ["category", 120], ["subcategory", 120], ["account", 90], ["", 45, "editButton"]]
 		self.grid = GridCtr(self, columns, db.SelectExpenses)
 		self.form.SubscribeForRefresh(self.grid)
+		self.form.SetConnectedGrid(self.grid)
 		self.grid.AtachForm(self.form)
 		self.__sizer()
 		

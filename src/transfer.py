@@ -12,7 +12,8 @@ class Transfer(wx.Panel):
 		self.form = TransferForm(self)
 		columns = [["date", 120], ["name", 120], ["value", 90], ["acc. from", 90], ["acc. to", 90], ["", 45, "editButton"]]
 		self.grid = GridCtr(self, columns, db.SelectTransfers)
-		self.form.SubscribeForRefresh(self.grid)		
+		self.form.SubscribeForRefresh(self.grid)
+		self.form.SetConnectedGrid(self.grid)		
 		self.grid.AtachForm(self.form)
 		self.__sizer()
 		

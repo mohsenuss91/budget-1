@@ -7,8 +7,6 @@ from accounts import Accounts
 from income import Income
 from transfer import Transfer
 from graphs import Analysis
-#from sandpit import Sandpit
-
 
 
 class MainWindow(wx.Frame):
