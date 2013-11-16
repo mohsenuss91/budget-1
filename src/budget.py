@@ -7,7 +7,7 @@ from accounts import Accounts
 from income import Income
 from transfer import Transfer
 from graphs import Analysis
-
+from dbConnectionFile import DbConnectionFile
 
 class MainWindow(wx.Frame):
 	def __init__(self):
@@ -29,7 +29,8 @@ class MainWindow(wx.Frame):
 
 
 if __name__ == '__main__':
-	db.Connect("localhost", "budget", "budget", "budgetDev")
+	connFile = DbConnectionFile("../connectionFile.ini")
+	db.Connect(connFile.host, connFile.user, connFile.password, connFile.database)
 	app = wx.PySimpleApp()
 	frame = MainWindow()
 	frame.Show(True)
